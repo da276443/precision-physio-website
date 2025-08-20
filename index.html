@@ -7,6 +7,28 @@
   <link rel="icon" href="favicon.png" type="image/png" />
   <link rel="preload" as="image" href="assets/hero.jpg">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* --- hero fix: show the ENTIRE image/logo, no cropping --- */
+    .hero{
+      position:relative;
+      background-image:url('assets/hero.jpg');
+      background-repeat:no-repeat;
+      background-size:contain;       /* was cover → now show full image */
+      background-position:center top;/* sit nicely near the top */
+      background-color:#0a6b75;      /* brand teal behind any empty space */
+      min-height:62vh;               /* good height on desktop */
+      display:flex; align-items:flex-end;
+    }
+    @media (max-width:900px){ .hero{ min-height:56vh; } }
+
+    /* darken only the lower part so tagline stays readable */
+    .hero .overlay{
+      position:absolute; inset:0;
+      background:linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,.45) 100%);
+    }
+    .hero-content{ position:relative; color:#fff; padding:10vh 0 12vh; }
+    .tagline{ font-size:clamp(18px,2.5vw,24px); max-width:720px }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -21,8 +43,8 @@
   </header>
 
   <main>
-    <!-- HERO (uses brand image with name baked in, so no duplicate text) -->
-    <section class="hero" style="background-image:url('assets/hero.jpg')">
+    <!-- HERO (uses your image that already contains the brand name) -->
+    <section class="hero">
       <div class="overlay"></div>
       <div class="container hero-content">
         <p class="tagline">Expert Physiotherapy for Pain Relief, Injury Recovery & Mobility</p>
@@ -37,13 +59,13 @@
     <section id="services" class="section">
       <div class="container">
         <h2>Services</h2>
-        <p class="subtle">Clinic & mobile services across Cardiff, tailored to help you move pain‑free.</p>
+        <p class="subtle">Clinic & mobile services across Cardiff, tailored to help you move pain-free.</p>
         <div class="cards">
           <div class="card"><h3>Back & Neck Pain</h3><p>Assessment, hands-on treatment and progressive exercise plans.</p></div>
           <div class="card"><h3>Joint Pain</h3><p>Knee, hip, shoulder, elbow & more — accurate diagnosis and rehab.</p></div>
           <div class="card"><h3>Muscle & Ligament Injuries</h3><p>Strains, sprains and overuse injuries — reduce pain and return to activity.</p></div>
-          <div class="card"><h3>Post‑Surgical Rehab</h3><p>Clear milestones and exercises to restore strength and function.</p></div>
-          <div class="card"><h3>Sports Injuries</h3><p>Football & rugby experience — return‑to‑play plans without the jargon.</p></div>
+          <div class="card"><h3>Post-Surgical Rehab</h3><p>Clear milestones and exercises to restore strength and function.</p></div>
+          <div class="card"><h3>Sports Injuries</h3><p>Football & rugby experience — return-to-play plans without the jargon.</p></div>
           <div class="card"><h3>Mobility & Strength</h3><p>Individual programmes to improve movement quality and resilience.</p></div>
         </div>
       </div>
@@ -54,15 +76,15 @@
       <div class="container two-col">
         <div>
           <h2>About</h2>
-          <p>Led by a clinical specialist physiotherapist with 9+ years NHS MSK experience and advanced MSc training. Evidence‑based assessment, clear explanations, and practical rehab to help you get back to what you love.</p>
+          <p>Led by a clinical specialist physiotherapist with 9+ years NHS MSK experience and advanced MSc training. Evidence-based assessment, clear explanations, and practical rehab to help you get back to what you love.</p>
           <ul class="ticks">
             <li>Advanced MSK master’s modules</li>
             <li>Extensive MSK outpatients experience</li>
             <li>Sports physio in football & rugby</li>
-            <li>Personalised, goal‑driven rehab plans</li>
+            <li>Personalised, goal-driven rehab plans</li>
           </ul>
           <div class="cta-row">
-            <a class="btn" href="#contact">Book a Consultation</a>
+            <a href="#contact" class="btn">Book a Consultation</a>
             <a class="link" href="https://instagram.com/precision_physiocardiff" target="_blank" rel="noreferrer">Follow on Instagram</a>
           </div>
         </div>
@@ -87,8 +109,8 @@
         </div>
 
         <div class="card form-card">
-          <!-- Netlify form -->
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="thank-you.html">
+          <!-- VISIBLE FORM (now with working redirect) -->
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
             <input type="hidden" name="form-name" value="contact">
             <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
 
@@ -127,13 +149,11 @@
     </div>
   </footer>
 
-  <!-- Hidden form so Netlify detects it on first deploy -->
-  <form name="contact" netlify netlify-honeypot="bot-field" action="thank-you.html" hidden>
+  <!-- keep this hidden form so Netlify detects the form on first deploy -->
+  <form name="contact" netlify netlify-honeypot="bot-field" action="/thank-you.html" hidden>
     <input type="text" name="name" />
     <input type="email" name="email" />
     <textarea name="message"></textarea>
   </form>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <script src
