@@ -103,5 +103,73 @@
           </div>
         </div>
         <div class="quotes">
-          <blockquote>“Saved my season —
+          <blockquote>“Saved my season — fantastic rehab and clear plans to get me back on the pitch.”<span>— A. Lewis</span></blockquote>
+          <blockquote>“Thorough assessment and excellent exercise guidance. Professional and personalised.”<span>— J. Patel</span></blockquote>
+        </div>
+      </div>
+    </section>
 
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container two-col">
+        <div>
+          <h2>Get in touch</h2>
+          <p>Use the form or choose a booking option below. We’ll reply within 48 hours.</p>
+          <div class="cta-row">
+            <a class="btn" href="mailto:precisionphysiocardiff@outlook.com?subject=Appointment%20Enquiry%20-%20Precision%20Physiotherapy%20Cardiff">Book via Email</a>
+            <a class="btn btn-outline" href="https://instagram.com/precision_physiocardiff" target="_blank" rel="noreferrer">Book via Instagram</a>
+          </div>
+          <p class="muted">Clinic bases available across Cardiff; exact location confirmed at booking.</p>
+        </div>
+
+        <div class="card form-card">
+          <!-- VISIBLE FORM -->
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
+            <input type="hidden" name="form-name" value="contact">
+            <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+            <label>Name
+              <input name="name" required>
+            </label>
+
+            <label>Email
+              <input name="email" type="email" required>
+            </label>
+
+            <label>Phone (optional)
+              <input name="phone" type="tel">
+            </label>
+
+            <label>Message
+              <textarea name="message" rows="4" required></textarea>
+            </label>
+
+            <button type="submit" class="btn">Send message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>© <span id="year"></span> Precision Physiotherapy Cardiff</small>
+      <div class="links">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="https://instagram.com/precision_physiocardiff" target="_blank" rel="noreferrer">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Hidden form (Netlify detection) -->
+  <form name="contact" netlify netlify-honeypot="bot-field" action="/thank-you.html" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <textarea name="message"></textarea>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
