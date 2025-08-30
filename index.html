@@ -8,29 +8,29 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
-    /* HERO as an <img> so the full logo is always visible (no cropping) */
+    /* --- HERO (background cover, no duplicate name) --- */
     .hero {
-      background-color: #0a6b75; /* brand teal behind the logo */
-      padding: 6vh 0 10vh;
-    }
-    .hero .hero-inner {
-      text-align: center;
-    }
-    .hero img.brand-hero {
+      position: relative;
+      min-height: 70vh;
+      background-image: url('assets/hero.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       display: block;
-      margin: 0 auto;
-      width: min(100%, 1100px);   /* full width but cap max size */
-      height: auto;
     }
-    .hero .tagline { 
-      color: #fff; 
-      margin-top: 18px; 
-      font-size: clamp(18px, 2.5vw, 22px);
+    .hero .overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.35); /* keep tagline readable */
     }
-
-    /* Keep the rest tidy on small screens */
+    .hero-content {
+      position: relative;
+      color: #fff;
+      padding: 18vh 0 12vh;
+    }
+    .tagline { font-size: clamp(18px, 2.5vw, 22px); max-width: 720px }
     @media (max-width: 768px) {
-      .hero { padding: 4vh 0 8vh; }
+      .hero { min-height: 56vh; }
+      .hero-content { padding: 12vh 0 10vh; }
     }
   </style>
 </head>
@@ -47,10 +47,10 @@
   </header>
 
   <main>
-    <!-- HERO (logo image, not a background) -->
+    <!-- HERO (background cover, only tagline + buttons) -->
     <section class="hero">
-      <div class="container hero-inner">
-        <img src="assets/hero.jpg" alt="Precision Physiotherapy Cardiff" class="brand-hero">
+      <div class="overlay"></div>
+      <div class="container hero-content">
         <p class="tagline">Expert Physiotherapy for Pain Relief, Injury Recovery & Mobility</p>
         <div class="cta-row">
           <a class="btn" href="mailto:precisionphysiocardiff@outlook.com?subject=Appointment%20Enquiry%20-%20Precision%20Physiotherapy%20Cardiff">Book via Email</a>
@@ -113,9 +113,14 @@
         </div>
 
         <div class="card form-card">
-          <!-- VISIBLE FORM with solid redirect -->
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="https://precision-physio-cardiff.netlify.app/thank-you.html">
-            <input type="hidden" name="form-name" value="contact">
+          <!-- VISIBLE FORM with Netlify redirect -->
+          <form name="contact"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                action="thank-you.html"
+                accept-charset="UTF-8">
+            <input type="hidden" name="form-name" value="contact" />
             <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
 
             <label>Name
@@ -154,7 +159,7 @@
   </footer>
 
   <!-- Hidden detection form (keep) -->
-  <form name="contact" netlify netlify-honeypot="bot-field" action="https://precision-physio-cardiff.netlify.app/thank-you.html" hidden>
+  <form name="contact" netlify netlify-honeypot="bot-field" action="thank-you.html" hidden>
     <input type="text" name="name" />
     <input type="email" name="email" />
     <textarea name="message"></textarea>
